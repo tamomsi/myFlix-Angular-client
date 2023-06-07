@@ -97,16 +97,16 @@ export class FetchApiDataService {
     );
   }
 
-  public addMovieToFavorites(movieId: string): Observable<any> {
+  public addMovieToFavorites(movieId: string, username: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.post(apiUrl + 'users/:userName/movies/' + movieId, null, {
+    return this.http.post(apiUrl + 'users/' + username + '/movies/' + movieId, null, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
     }).pipe(
       catchError(this.handleError)
     );
-  }  
+  }
 
   public editUser(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
@@ -139,7 +139,7 @@ export class FetchApiDataService {
     }).pipe(
       catchError(this.handleError)
     );
-  }
+  }    
 
   private extractResponseData(res: Response): any {
     const body = res;
