@@ -1,0 +1,40 @@
+.mat-card.director-dialog {
+  background-color: royalblue;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.mat-card.director-dialog .director-close-button {
+  color: white;
+}
+
+.mat-card.director-dialog .mat-card-title {
+  color: white;
+}
+
+.mat-card.director-dialog .mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: royalblue;
+}
+
+h3.director-dialog-title {
+  text-align: center;
+}
+
+.director-dialog-content b {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .mat-card.director-dialog {
+    padding: 16px;
+  }
+}

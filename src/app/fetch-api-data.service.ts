@@ -51,7 +51,7 @@ export class FetchApiDataService {
 
   public getDirector(directorName: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'directors/' + directorName, {
+    return this.http.get(apiUrl + 'movies/director/' + directorName, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
@@ -63,7 +63,7 @@ export class FetchApiDataService {
 
   public getGenre(genreName: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'genres/' + genreName, {
+    return this.http.get(apiUrl + 'movies/genre/' + genreName, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
@@ -72,6 +72,7 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
+  
 
   public getUser(username: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -110,7 +111,7 @@ export class FetchApiDataService {
 
   public editUser(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/:userName', userDetails, {
+    return this.http.put(apiUrl + 'users/' + userDetails.UserName, userDetails, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
@@ -118,6 +119,7 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
+  
   
   public deleteUser(username: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -132,14 +134,14 @@ export class FetchApiDataService {
   
   public deleteFavoriteMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/movies/' + movieId, {
+    return this.http.delete(apiUrl + 'users/:UserName/movies/' + movieId, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
     }).pipe(
       catchError(this.handleError)
     );
-  }    
+  }      
 
   private extractResponseData(res: any): any {
     const body = res;

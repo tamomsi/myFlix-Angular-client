@@ -1,0 +1,19 @@
+<mat-card class="movie-details-container">
+    <mat-card-title>{{ movie?.Title }}</mat-card-title>
+    <mat-dialog-content>
+        <div class="movie-info-container">
+            <div><span>Movie Director</span>: {{ movie?.Director }}</div>
+            <div><span>Genre</span>: {{ movie?.Genre }}</div>
+            <div><span>Movie Description</span>: {{ movie?.Description }}</div>
+        </div>
+        <div class="movie-img-container">
+            <img [src]="movie?.Image" alt="">
+        </div>
+    </mat-dialog-content>
+    <mat-card-actions>
+        <button class="genre-close-button" mat-stroked-button aria-label="Close the genre details button"
+            mat-dialog-close color="primary">
+            Close
+        </button>
+    </mat-card-actions>
+</mat-card>

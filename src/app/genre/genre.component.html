@@ -1,0 +1,19 @@
+<mat-card class="genre-dialog">
+    <button
+    class="director-close-button"
+    mat-stroked-button
+    aria-label="Close the director details button"
+    mat-dialog-close
+    color="primary"
+  >
+    Close
+  </button>
+
+    <mat-card-title>
+      <h3 class="genre-dialog-title">{{ genre.Name }}</h3>
+    </mat-card-title>
+    <br />
+    <mat-dialog-content class="genre-dialog-content">
+      <b>Description: </b>{{ genre.Description }}
+    </mat-dialog-content>
+  </mat-card>
