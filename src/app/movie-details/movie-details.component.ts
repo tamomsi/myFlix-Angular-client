@@ -1,26 +1,21 @@
-import { Component, Input } from '@angular/core';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss']
 })
-export class MovieDetailsComponent {
-  @Input() movieId?: string;
-  movie: any;
-
-  constructor(private fetchApiData: FetchApiDataService) {}
-
-  ngOnInit(): void {
-    if (this.movieId) {
-      this.fetchMovieDetails(this.movieId);
+export class MovieDetailsComponent implements OnInit {
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      title: string;
+      genre: string;
+      director: string;
+      description: string;
     }
-  }
+  ) {}
 
-  fetchMovieDetails(movieId: string): void {
-    this.fetchApiData.getMovie(movieId).subscribe((response: any) => {
-      this.movie = response;
-    });
-  }
+  ngOnInit(): void {}
 }

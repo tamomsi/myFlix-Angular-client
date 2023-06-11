@@ -1,0 +1,19 @@
+.mat-card.movie-details-dialog {
+  background-color: royalblue;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.mat-card.movie-details-dialog .mat-dialog-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h3.movie-details-dialog-title {
+  text-align: center;
+}

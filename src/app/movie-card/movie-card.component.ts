@@ -3,7 +3,8 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DirectorComponent } from '../director/director.component';
-import { GenreComponent } from '../genre/genre.component'; // Import the GenreComponent
+import { GenreComponent } from '../genre/genre.component';
+import { MovieDetailsComponent } from '../movie-details/movie-details.component'; // Import the MovieDetailsComponent
 
 @Component({
   selector: 'app-movie-card',
@@ -52,14 +53,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Fetch the genre details and open the genre dialog
   fetchGenreDetails(genreName: string): void {
     this.fetchApiData.getGenre(genreName).subscribe((response: any) => {
       this.openGenreDialog(response);
     });
   }
 
-  // Open the genre dialog
   openGenreDialog(genre: any): void {
     const dialogRef = this.dialog.open(GenreComponent, {
       width: '400px',
@@ -69,6 +68,22 @@ export class MovieCardComponent implements OnInit {
       },
     });
 
+    dialogRef.afterClosed().subscribe(() => {
+      // Handle any logic after the dialog is closed (if needed)
+    });
+  }
+
+  openMovieDetailsDialogWithData(movie: any): void {
+    const dialogRef = this.dialog.open(MovieDetailsComponent, {
+      width: '400px',
+      data: {
+        title: movie.Title,
+        genre: movie.Genre.Name,
+        director: movie.Director.Name,
+        description: movie.Description
+      },
+    });
+  
     dialogRef.afterClosed().subscribe(() => {
       // Handle any logic after the dialog is closed (if needed)
     });
