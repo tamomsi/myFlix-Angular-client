@@ -1,0 +1,25 @@
+.navbar {
+  background-color: royalblue;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  margin: 0 20px 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+  padding: 5px 10px;
+}
+
+.navbar a:hover {
+  background-color: #555;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}

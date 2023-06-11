@@ -24,6 +24,7 @@ import { GenreComponent } from './genre/genre.component';
 import { UserFavoriteMoviesComponent } from './user-favorite-movies/user-favorite-movies.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { FetchApiDataService } from './fetch-api-data.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     DirectorComponent,
     GenreComponent,
     UserFavoriteMoviesComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
