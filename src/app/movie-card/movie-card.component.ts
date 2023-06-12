@@ -23,12 +23,18 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
-    const UserName = localStorage.getItem('user');
+    const UserName = localStorage.getItem('UserName');
     if (UserName) {
       this.fetchApiData.getFavoriteMovies(UserName).subscribe((resp: any) => {
         this.favorites = resp;
         console.log(this.favorites);
       });
+  
+      // Load favorites from localStorage
+      const storedFavorites = localStorage.getItem('favorites');
+      if (storedFavorites) {
+        this.favorites = JSON.parse(storedFavorites);
+      }
     }
   }
 
@@ -107,6 +113,7 @@ export class MovieCardComponent implements OnInit {
       this.fetchApiData.addMovieToFavorites(movieId, UserName).subscribe((response: any) => {
         console.log(response);
         this.favorites.push(movieId);
+        localStorage.setItem('favorites', JSON.stringify(this.favorites)); // Store favorites in localStorage
         window.alert("Movie added to favorites");
       });
     } else {
@@ -123,12 +130,14 @@ export class MovieCardComponent implements OnInit {
         if (index > -1) {
           this.favorites.splice(index, 1);
         }
+        localStorage.setItem('favorites', JSON.stringify(this.favorites)); // Update favorites in localStorage
         window.alert("Movie removed from favorites");
       });
     } else {
       window.alert("User not logged in");
     }
   }
+  
   
   
   

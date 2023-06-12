@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   public userProfile: any = {};
+  public favoriteMovies: any[] = []; 
   public editMode: boolean = false;
 
   constructor(
@@ -20,17 +21,29 @@ export class UserProfileComponent implements OnInit {
     if (UserName) {
       this.fetchApiData.getUser(UserName).subscribe((user) => {
         this.userProfile = user;
+        this.getFavoriteMovies(UserName); // Pass UserName as an argument
       });
+      // Get favorite movies from local storage
+      const storedFavorites = localStorage.getItem('favorites');
+      if (storedFavorites) {
+        this.favoriteMovies = JSON.parse(storedFavorites);
+      }
     }
   }
 
   goBack() {
-    this.router.navigate(['/movies']); // Adjust this path to match your movie card view path
-}
+    this.router.navigate(['/movies']); 
+  }
 
-cancelEdit(): void {
-  this.editMode = false;
-}
+  getFavoriteMovies(UserName: string) {
+    this.fetchApiData.getFavoriteMovies(UserName).subscribe((movies) => {
+        this.favoriteMovies = movies;
+    });
+  }
+
+  cancelEdit(): void {
+    this.editMode = false;
+  }
 
   enableEditMode(): void {
     this.editMode = true;
