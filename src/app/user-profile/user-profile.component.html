@@ -1,1 +1,25 @@
-<p>user-profile works!</p>
+<div>
+    <h1>User Profile</h1>
+    <div *ngIf="!editMode" id="profile-form">
+      <p>Username: {{userProfile.UserName}}</p>
+      <p>Email: {{userProfile.email}}</p>
+      <p>Birthday: {{userProfile.Birthday | date:'dd/MM/yyyy'}}</p>
+      <button (click)="goBack()">Back</button>
+      <button (click)="enableEditMode()">Edit profile</button>
+    </div>
+    <div *ngIf="editMode" id="edit-form">
+      <div class="input-group">
+        <label class="edit-label">Username:</label>
+        <input [(ngModel)]="userProfile.UserName" class="edit-input"/>
+      </div>
+      <div class="input-group">
+        <label class="edit-label">Email:</label>
+        <input [(ngModel)]="userProfile.email" class="edit-input"/>
+      </div>
+      <div class="button-group">
+        <button (click)="saveProfile()">Save profile</button>
+        <button (click)="cancelEdit()">Back</button> <!-- Here use cancelEdit instead of goBack -->
+      </div>
+    </div>
+  </div>
+  

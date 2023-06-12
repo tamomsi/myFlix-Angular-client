@@ -21,7 +21,6 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DirectorComponent } from './director/director.component';
 import { GenreComponent } from './genre/genre.component';
-import { UserFavoriteMoviesComponent } from './user-favorite-movies/user-favorite-movies.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { FetchApiDataService } from './fetch-api-data.service';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -44,7 +43,6 @@ const appRoutes: Routes = [
     UserProfileComponent,
     DirectorComponent,
     GenreComponent,
-    UserFavoriteMoviesComponent,
     MovieDetailsComponent,
     NavbarComponent
   ],
@@ -63,7 +61,7 @@ const appRoutes: Routes = [
     MatIconModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FetchApiDataService],
+  providers: [FetchApiDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

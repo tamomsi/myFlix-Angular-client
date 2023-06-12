@@ -13,6 +13,7 @@ import { MovieDetailsComponent } from '../movie-details/movie-details.component'
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+  favorites: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -22,6 +23,17 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
+    const UserName = localStorage.getItem('user');
+    if (UserName) {
+      this.fetchApiData.getFavoriteMovies(UserName).subscribe((resp: any) => {
+        this.favorites = resp;
+        console.log(this.favorites);
+      });
+    }
+  }
+
+  isFavorite(movieId: string): boolean {
+    return this.favorites.includes(movieId);
   }
 
   getMovies(): void {
@@ -88,4 +100,36 @@ export class MovieCardComponent implements OnInit {
       // Handle any logic after the dialog is closed (if needed)
     });
   }
+
+  addToFavorites(movieId: string): void {
+    const UserName = localStorage.getItem('UserName');
+    if (UserName) {
+      this.fetchApiData.addMovieToFavorites(movieId, UserName).subscribe((response: any) => {
+        console.log(response);
+        this.favorites.push(movieId);
+        window.alert("Movie added to favorites");
+      });
+    } else {
+      window.alert("User not logged in");
+    }
+  }
+  
+  removeFromFavorites(movieId: string): void {
+    const UserName = localStorage.getItem('UserName');
+    if (UserName) {
+      this.fetchApiData.deleteFavoriteMovie(movieId, UserName).subscribe((response: any) => {
+        console.log(response);
+        const index = this.favorites.indexOf(movieId);
+        if (index > -1) {
+          this.favorites.splice(index, 1);
+        }
+        window.alert("Movie removed from favorites");
+      });
+    } else {
+      window.alert("User not logged in");
+    }
+  }
+  
+  
+  
 }
