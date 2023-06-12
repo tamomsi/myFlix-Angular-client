@@ -9,19 +9,20 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   public userProfile: any = {};
-  public favoriteMovies: any[] = []; 
+  public favoriteMovies: any[] = []; // Add a new array to store favorite movies
   public editMode: boolean = false;
 
   constructor(
     private fetchApiData: FetchApiDataService,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const UserName = localStorage.getItem('UserName');
     if (UserName) {
       this.fetchApiData.getUser(UserName).subscribe((user) => {
         this.userProfile = user;
-        this.getFavoriteMovies(UserName); // Pass UserName as an argument
+        this.getFavoriteMovies(); // Fetch and display favorite movies from local storage
       });
       // Get favorite movies from local storage
       const storedFavorites = localStorage.getItem('favorites');
@@ -31,16 +32,27 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  goBack() {
-    this.router.navigate(['/movies']); 
+  goBack(): void {
+    this.router.navigate(['/movies']);
   }
 
-  getFavoriteMovies(UserName: string) {
-    this.fetchApiData.getFavoriteMovies(UserName).subscribe((movies) => {
-        this.favoriteMovies = movies;
-    });
+  getFavoriteMovies(): void {
+    const storedFavorites = localStorage.getItem('favorites');
+    if (storedFavorites) {
+      const favoriteMovieIds = JSON.parse(storedFavorites);
+      this.fetchApiData.getAllMovies().subscribe((movies: any[]) => {
+        this.favoriteMovies = movies
+          .filter((movie: any) => favoriteMovieIds.includes(movie._id))
+          .map((movie: any) => {
+            return {
+              ImagePath: movie.ImagePath,
+              Title: movie.Title
+            };
+          });
+      });
+    }
   }
-
+  
   cancelEdit(): void {
     this.editMode = false;
   }
@@ -51,8 +63,9 @@ export class UserProfileComponent implements OnInit {
 
   saveProfile(): void {
     this.fetchApiData.editUser(this.userProfile).subscribe((response) => {
-      this.editMode = false; 
+      this.editMode = false;
     }, (error) => {
+      // Handle error if needed
     });
   }
 }

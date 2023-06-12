@@ -10,15 +10,25 @@
   <div *ngIf="editMode" id="edit-form">
     <div class="input-group">
       <label class="edit-label">Username:</label>
-      <input [(ngModel)]="userProfile.UserName" class="edit-input"/>
+      <input [(ngModel)]="userProfile.UserName" class="edit-input" />
     </div>
     <div class="input-group">
       <label class="edit-label">Email:</label>
-      <input [(ngModel)]="userProfile.email" class="edit-input"/>
+      <input [(ngModel)]="userProfile.email" class="edit-input" />
     </div>
     <div class="button-group">
       <button mat-raised-button color="primary" (click)="cancelEdit()">Back</button>
       <button mat-raised-button color="primary" (click)="saveProfile()">Save profile</button>
     </div>
+  </div>
+
+  <div class="movie-card-container">
+    <h2>Favorite Movies</h2>
+    <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
+      <mat-card-header>
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+      </mat-card-header>
+      <img [src]="movie.ImagePath" [alt]="movie.Title" />
+    </mat-card>
   </div>
 </div>
