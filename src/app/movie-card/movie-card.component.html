@@ -1,4 +1,5 @@
-<app-navbar></app-navbar> 
+<app-navbar></app-navbar>
+
 <div class="movie-card-container">
   <mat-card *ngFor="let movie of movies" class="movie-card">
     <mat-card-header>
@@ -10,8 +11,12 @@
       <button mat-button color="primary" (click)="fetchGenreDetails(movie.Genre.Name)">Genre</button>
       <button mat-button color="primary" (click)="openDirector(movie.Director.Name)">Director</button>
       <button mat-button (click)="openMovieDetailsDialogWithData(movie)">Details</button>
-      <mat-icon *ngIf="!isFavorite(movie._id)" (click)="addToFavorites(movie._id)">favorite_border</mat-icon>
-      <mat-icon *ngIf="isFavorite(movie._id)" (click)="removeFromFavorites(movie._id)">favorite</mat-icon>
+      <button mat-icon-button color="primary" *ngIf="!isFavorite(movie._id)" (click)="addToFavorites(movie._id)">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" *ngIf="isFavorite(movie._id)" (click)="removeFromFavorites(movie._id)">
+        <mat-icon>favorite</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

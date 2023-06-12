@@ -1,18 +1,16 @@
 h1 {
   text-align: center;
-  color: #333;
+  color: royalblue;
 }
 
 div {
   padding: 20px;
-  background-color: #f5f5f5;
   border-radius: 10px;
 }
 
 p {
   margin-bottom: 10px;
   font-size: 18px;
-  color: #666;
 }
 
 input {
@@ -20,7 +18,7 @@ input {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid;
   border-radius: 4px;
 }
 
@@ -35,18 +33,18 @@ button {
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: white;
+  color: royalblue;
 }
 
 .edit-label {
-  font-size: 14px; /* The size of the label in editMode */
-  color: #666; /* The color of the label in editMode */
+  font-size: 14px;
 }
 
 .edit-input {
   width: 100%; /* The width of the input field in editMode */
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid;
   border-radius: 4px;
   font-size: 14px; /* The size of the text in the input field in editMode */
 }
@@ -61,8 +59,7 @@ button:hover {
   margin: auto;
 }
 
-/* Styles for viewports that are at least 600px wide */
-@media (min-width: 600px) {
+@media (min-width: 300px) {
   #profile-form,
   #edit-form {
     width: 80%;
@@ -73,6 +70,6 @@ button:hover {
 @media (min-width: 900px) {
   #profile-form,
   #edit-form {
-    width: 60%;
+    width: 50%;
   }
 }
