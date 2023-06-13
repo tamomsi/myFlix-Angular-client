@@ -137,8 +137,4 @@ export class MovieCardComponent implements OnInit {
       window.alert("User not logged in");
     }
   }
-  
-  
-  
-  
 }

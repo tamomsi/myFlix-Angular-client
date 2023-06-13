@@ -1,4 +1,5 @@
-h1 {
+h1,
+h2 {
   text-align: center;
   color: royalblue;
 }
@@ -72,4 +73,15 @@ button:hover {
   #edit-form {
     width: 50%;
   }
+}
+
+.movie-card-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-card {
+  margin: 10px;
+  width: 300px; /* Adjust the width as needed */
 }

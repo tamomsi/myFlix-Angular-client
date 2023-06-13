@@ -24,11 +24,15 @@
 
   <div class="movie-card-container">
     <h2>Favorite Movies</h2>
+    <div class="movie-card-row"></div>
     <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
-      <mat-card-header>
-        <mat-card-title>{{ movie.Title }}</mat-card-title>
-      </mat-card-header>
-      <img [src]="movie.ImagePath" [alt]="movie.Title" />
+      <img mat-card-image [src]="movie?.ImagePath" [alt]="movie?.Title" />
+      <button mat-icon-button color="primary" *ngIf="!isFavorite(movie?._id)" (click)="addToFavorites(movie?._id)">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" *ngIf="isFavorite(movie?._id)" (click)="removeFromFavorites(movie?._id)">
+        <mat-icon>favorite</mat-icon>
+      </button>
     </mat-card>
   </div>
 </div>

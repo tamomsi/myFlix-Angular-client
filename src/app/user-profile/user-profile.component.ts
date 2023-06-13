@@ -52,6 +52,34 @@ export class UserProfileComponent implements OnInit {
       });
     }
   }
+
+  isFavorite(movieId: string): boolean {
+    return this.favoriteMovies.some((favorite) => favorite._id === movieId);
+  }  
+  
+  addToFavorites(movieId: string): void {
+    const UserName = localStorage.getItem('UserName');
+    if (UserName) {
+      this.fetchApiData.addMovieToFavorites(movieId, UserName).subscribe((response: any) => {
+        console.log(response);
+        this.favoriteMovies.push(movieId);
+        localStorage.setItem('favorites', JSON.stringify(this.favoriteMovies)); // Store favorites in localStorage
+        window.alert("Movie added to favorites");
+      });
+    } else {
+      window.alert("User not logged in");
+    }
+  }
+  
+  removeFromFavorites(movieId: string): void {
+    const index = this.favoriteMovies.findIndex((favorite) => favorite._id === movieId);
+    if (index > -1) {
+      this.favoriteMovies.splice(index, 1);
+      localStorage.setItem('favorites', JSON.stringify(this.favoriteMovies)); // Update favorites in localStorage
+      window.alert("Movie removed from favorites");
+    }
+  }
+  
   
   cancelEdit(): void {
     this.editMode = false;
