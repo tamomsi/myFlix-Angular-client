@@ -1,26 +1,69 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
 h1,
 h2 {
   text-align: center;
   color: royalblue;
 }
 
-div {
+.mat-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px;
   padding: 20px;
+  border: 3px solid royalblue;
   border-radius: 10px;
 }
 
-p {
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-
-input {
-  display: block;
+.mat-form-field {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
   border: 1px solid;
   border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.mat-form-field mat-label {
+  font-size: 14px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.card-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profile-form {
+  text-align: center;
+}
+
+.profile-form,
+.edit-form {
+  width: 50%;
+  max-width: 500px; /* Adjust as needed */
+  margin: auto;
+}
+
+.profile-form p,
+.edit-form p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 button {
@@ -38,44 +81,11 @@ button:hover {
   color: royalblue;
 }
 
-.edit-label {
-  font-size: 14px;
+.movie-card-container {
+  margin-top: 20px;
 }
 
-.edit-input {
-  width: 100%; /* The width of the input field in editMode */
-  padding: 10px;
-  border: 1px solid;
-  border-radius: 4px;
-  font-size: 14px; /* The size of the text in the input field in editMode */
-}
-
-#profile-form,
-#edit-form {
-  border: 3px solid royalblue;
-  border-radius: 10px;
-  padding: 20px;
-  width: 100%;
-  max-width: 500px;
-  margin: auto;
-}
-
-@media (min-width: 300px) {
-  #profile-form,
-  #edit-form {
-    width: 80%;
-  }
-}
-
-/* Styles for viewports that are at least 900px wide */
-@media (min-width: 900px) {
-  #profile-form,
-  #edit-form {
-    width: 50%;
-  }
-}
-
-.movie-card-row {
+.grid-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -83,5 +93,19 @@ button:hover {
 
 .movie-card {
   margin: 10px;
-  width: 300px; /* Adjust the width as needed */
+  max-width: 300px;
+}
+
+@media (min-width: 300px) {
+  .profile-form,
+  .edit-form {
+    width: 50%;
+  }
+}
+
+@media (min-width: 900px) {
+  .profile-form,
+  .edit-form {
+    width: 50%;
+  }
 }

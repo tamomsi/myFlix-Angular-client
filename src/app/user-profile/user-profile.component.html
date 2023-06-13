@@ -1,38 +1,48 @@
-<div>
-  <h1>User Profile</h1>
-  <div *ngIf="!editMode" id="profile-form">
-    <p>Username: {{userProfile.UserName}}</p>
-    <p>Email: {{userProfile.email}}</p>
-    <p>Birthday: {{userProfile.Birthday | date:'dd/MM/yyyy'}}</p>
-    <button mat-raised-button color="primary" (click)="goBack()">Back</button>
-    <button mat-raised-button color="primary" (click)="enableEditMode()">Edit profile</button>
-  </div>
-  <div *ngIf="editMode" id="edit-form">
-    <div class="input-group">
-      <label class="edit-label">Username:</label>
-      <input [(ngModel)]="userProfile.UserName" class="edit-input" />
-    </div>
-    <div class="input-group">
-      <label class="edit-label">Email:</label>
-      <input [(ngModel)]="userProfile.email" class="edit-input" />
-    </div>
-    <div class="button-group">
-      <button mat-raised-button color="primary" (click)="cancelEdit()">Back</button>
-      <button mat-raised-button color="primary" (click)="saveProfile()">Save profile</button>
-    </div>
-  </div>
+<div class="mat-app-background">
+  <mat-card>
+    <h1 class="mat-headline text-center">User Profile</h1>
+    <mat-card-content class="card-content">
+      <div *ngIf="!editMode" id="profile-form" class="profile-form">
+        <p class="mat-subheading-2">Username: {{userProfile.UserName}}</p>
+        <p class="mat-subheading-2">Email: {{userProfile.email}}</p>
+        <p class="mat-subheading-2">Birthday: {{userProfile.Birthday | date:'dd/MM/yyyy'}}</p>
+        <div class="button-group">
+          <button mat-raised-button color="primary" (click)="goBack()">Back</button>
+          <button mat-raised-button color="primary" (click)="enableEditMode()">Edit profile</button>
+        </div>
+      </div>
 
-  <div class="movie-card-container">
-    <h2>Favorite Movies</h2>
-    <div class="movie-card-row"></div>
-    <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
-      <img mat-card-image [src]="movie?.ImagePath" [alt]="movie?.Title" />
-      <button mat-icon-button color="primary" *ngIf="!isFavorite(movie?._id)" (click)="addToFavorites(movie?._id)">
-        <mat-icon>favorite_border</mat-icon>
-      </button>
-      <button mat-icon-button color="primary" *ngIf="isFavorite(movie?._id)" (click)="removeFromFavorites(movie?._id)">
-        <mat-icon>favorite</mat-icon>
-      </button>
-    </mat-card>
-  </div>
+      <div *ngIf="editMode" id="edit-form" class="edit-form">
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput [(ngModel)]="userProfile.UserName" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="userProfile.email" />
+        </mat-form-field>
+        <div class="button-group">
+          <button mat-raised-button color="primary" (click)="cancelEdit()">Back</button>
+          <button mat-raised-button color="primary" (click)="saveProfile()">Save profile</button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="movie-card-container">
+    <h2 class="mat-headline text-center">Favorite Movies</h2>
+    <mat-card-content>
+      <div class="grid-container">
+        <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
+          <img mat-card-image [src]="movie?.ImagePath" [alt]="movie?.Title" />
+          <button mat-icon-button color="primary" *ngIf="!isFavorite(movie?._id)" (click)="addToFavorites(movie?._id)">
+            <mat-icon>favorite_border</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" *ngIf="isFavorite(movie?._id)" (click)="removeFromFavorites(movie?._id)">
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
