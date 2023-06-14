@@ -6,6 +6,9 @@ import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component'; // Import the MovieDetailsComponent
 
+/**
+ * A component that represents a movie card.
+ */
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -15,12 +18,21 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   favorites: any[] = [];
 
+  /**
+   * Constructs a new MovieCardComponent.
+   * @param fetchApiData - The service to fetch data from the API
+   * @param router - The Angular router
+   * @param dialog - The service to handle dialogs
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     private router: Router,
     private dialog: MatDialog
   ) {}
 
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {
     this.getMovies();
     const UserName = localStorage.getItem('UserName');
@@ -38,10 +50,18 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks if a movie is a favorite.
+   * @param movieId - The ID of the movie
+   * @returns True if the movie is a favorite; false otherwise
+   */
   isFavorite(movieId: string): boolean {
     return this.favorites.includes(movieId);
   }
 
+  /**
+   * Fetches all movies.
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -50,16 +70,28 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Shows the details of a movie.
+   * @param movie - The movie whose details to show
+   */
   showMovieDetails(movie: any): void {
     this.router.navigate(['/movie-details', movie._id]);
   }
 
+  /**
+   * Opens the director dialog.
+   * @param directorName - The name of the director
+   */
   openDirector(directorName: string): void {
     this.fetchApiData.getDirector(directorName).subscribe((response: any) => {
       this.openDirectorDialog(response);
     });
   }
 
+  /**
+   * Opens the director dialog with data.
+   * @param director - The director data
+   */
   openDirectorDialog(director: any): void {
     const dialogRef = this.dialog.open(DirectorComponent, {
       width: '400px',
@@ -71,12 +103,20 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetches the details of a genre.
+   * @param genreName - The name of the genre
+   */
   fetchGenreDetails(genreName: string): void {
     this.fetchApiData.getGenre(genreName).subscribe((response: any) => {
       this.openGenreDialog(response);
     });
   }
 
+  /**
+   * Opens the genre dialog with data.
+   * @param genre - The genre data
+   */
   openGenreDialog(genre: any): void {
     const dialogRef = this.dialog.open(GenreComponent, {
       width: '400px',
@@ -91,6 +131,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+    /**
+   * Opens the movie details dialog with data.
+   * @param movie - The movie data
+   */
   openMovieDetailsDialogWithData(movie: any): void {
     const dialogRef = this.dialog.open(MovieDetailsComponent, {
       width: '400px',
@@ -107,6 +151,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Adds a movie to the favorites.
+   * @param movieId - The ID of the movie to add
+   */
   addToFavorites(movieId: string): void {
     const UserName = localStorage.getItem('UserName');
     if (UserName) {
@@ -121,6 +169,10 @@ export class MovieCardComponent implements OnInit {
     }
   }
   
+    /**
+   * Removes a movie from the favorites.
+   * @param movieId - The ID of the movie to remove
+   */
   removeFromFavorites(movieId: string): void {
     const UserName = localStorage.getItem('UserName');
     if (UserName) {

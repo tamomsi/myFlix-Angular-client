@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
+
 export class UserProfileComponent implements OnInit {
   public userProfile: any = {};
   public favoriteMovies: any[] = []; // Add a new array to store favorite movies
@@ -22,7 +23,7 @@ export class UserProfileComponent implements OnInit {
     if (UserName) {
       this.fetchApiData.getUser(UserName).subscribe((user) => {
         this.userProfile = user;
-        this.getFavoriteMovies(); // Fetch and display favorite movies from local storage
+        this.getFavoriteMovies();   // Fetch and display favorite movies from local storage
       });
       // Get favorite movies from local storage
       const storedFavorites = localStorage.getItem('favorites');
@@ -32,10 +33,16 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * Navigates to the /movies route.
+   */
   goBack(): void {
     this.router.navigate(['/movies']);
   }
 
+  /**
+   * Fetches favorite movies from local storage and sets them to favoriteMovies array.
+   */
   getFavoriteMovies(): void {
     const storedFavorites = localStorage.getItem('favorites');
     if (storedFavorites) {
@@ -53,10 +60,19 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks whether a movie is a favorite or not.
+   * @param movieId - The id of the movie to check.
+   * @returns True if the movie is a favorite, false otherwise.
+   */
   isFavorite(movieId: string): boolean {
     return this.favoriteMovies.some((favorite) => favorite._id === movieId);
   }  
   
+  /**
+   * Adds a movie to the list of favorites.
+   * @param movieId - The id of the movie to add.
+   */
   addToFavorites(movieId: string): void {
     const UserName = localStorage.getItem('UserName');
     if (UserName) {
@@ -71,6 +87,10 @@ export class UserProfileComponent implements OnInit {
     }
   }
   
+  /**
+   * Removes a movie from the list of favorites.
+   * @param movieId - The id of the movie to remove.
+   */
   removeFromFavorites(movieId: string): void {
     const index = this.favoriteMovies.findIndex((favorite) => favorite._id === movieId);
     if (index > -1) {
@@ -80,15 +100,23 @@ export class UserProfileComponent implements OnInit {
     }
   }
   
-  
+  /**
+   * Disables edit mode.
+   */
   cancelEdit(): void {
     this.editMode = false;
   }
 
+  /**
+   * Enables edit mode.
+   */
   enableEditMode(): void {
     this.editMode = true;
   }
 
+  /**
+   * Saves the profile and disables edit mode.
+   */
   saveProfile(): void {
     this.fetchApiData.editUser(this.userProfile).subscribe((response) => {
       this.editMode = false;

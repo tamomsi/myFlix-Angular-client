@@ -34,6 +34,10 @@ const appRoutes: Routes = [
   { path: 'movie-details/:id', component: MovieDetailsComponent },
 ];
 
+/**
+ * The main module for the application.
+ * It imports all necessary modules and declares all components.
+ */
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,4 +70,8 @@ const appRoutes: Routes = [
   providers: [FetchApiDataService ],
   bootstrap: [AppComponent]
 })
+
+/**
+ * The AppModule class represents the main module of the application.
+ */
 export class AppModule { }
